@@ -2,7 +2,6 @@
  * Main Extension Service Worker as ESModule
  */
 
-
 // chrome.action.onClicked.addListener((tab) => {
 //     chrome.scripting.executeScript({
 //         target: {tabId: tab.id},
@@ -17,7 +16,7 @@
 //     });
 //  });
 
- chrome.runtime.onInstalled.addListener((details) => {
-     // Debug output for easier development
-     console.log(`Ask GPT Extension changed because of: ${details.reason}!`);
- });
+chrome.runtime.onInstalled.addListener(details => {
+	// Debug output for easier development
+	console.log(`Ask GPT Extension changed because of: ${details.reason}!`);
+});
