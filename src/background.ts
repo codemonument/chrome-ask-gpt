@@ -1,6 +1,7 @@
-import { userLoggedIn } from './lib/state.js';
+import { loadingTabIds, userLoggedIn } from './lib/state.js';
 import { z } from "zod";
 import './manifest.json';
+import { insertTextIntoChatGPT } from './lib/client-scripts';
 
 /**
  * Main Extension Service Worker as ESModule
@@ -23,6 +24,28 @@ import './manifest.json';
 chrome.runtime.onInstalled.addListener(details => {
 	// Debug output for easier development
 	console.log(`Ask GPT Extension changed because of: ${details.reason}!`);
+});
+
+// Listen for tab updates to determin loading finished state for chat.openai.com
+chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
+	// Check if the updated tab is the one we created
+	const loadingTab = loadingTabIds.get(tabId);
+	if (loadingTab && loadingTab.isLoading && changeInfo.status === 'complete') {
+		loadingTab.isLoading = false;
+		console.log('Tab has finished loading:', { url: tab.url, tabId });
+
+		// Inject queryText into chat.openai.com
+		const injectionResult = await chrome.scripting.executeScript({
+			target: { tabId },
+			func: insertTextIntoChatGPT,
+			args: [loadingTab.queryText] as any
+		});
+
+		console.debug(`Injection result`, injectionResult);
+		return;
+	}
+
+	// console.debug(`Received some other tab update`, { tabId, changeInfo, tab })
 });
 
 /**
@@ -55,6 +78,11 @@ chrome.omnibox.onInputStarted.addListener(async () => {
 
 	if (res.status === 200) {
 		userLoggedIn.value = true;
+		chrome.omnibox.setDefaultSuggestion({
+			description: 'Send query to ChatGPT ',
+			// content: 'https://chat.openai.com/auth/login',
+			// deletable: false,
+		});
 	}
 });
 
@@ -63,10 +91,15 @@ chrome.omnibox.onInputStarted.addListener(async () => {
  */
 chrome.omnibox.onInputChanged.addListener((text, suggestCallback) => {
 	console.log(`Omnibox input changed`, text);
+	// suggestCallback([{
+	// 	description: 'Ask ChatGPT: ',
+	// 	content: text,
+	// 	deletable: true,
+	// }])
 });
 
-chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
-	console.debug(`Omnibox input entered`, { text, disposition, userLoggedIn: userLoggedIn.value });
+chrome.omnibox.onInputEntered.addListener(async (queryText, disposition) => {
+	console.debug(`Omnibox input entered`, { text: queryText, disposition, userLoggedIn: userLoggedIn.value });
 
 	// Short-Circuit to chatGPT login
 	if (userLoggedIn.value === false) {
@@ -81,7 +114,7 @@ chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
 		url: 'https://chat.openai.com/chat',
 	}
 
-	let tabPromise;
+	let tabPromise: Promise<chrome.tabs.Tab>;
 	switch (disposition) {
 		case 'currentTab':
 			// tabId will default to current tab (which is enough for me bc. this extension is an omnibox one)
@@ -100,16 +133,10 @@ chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
 	const tab = await tabPromise;
 	const tabId = z.number().parse(tab.id);
 
-	chrome.scripting.executeScript({
-		target: { tabId },
-		func() {
-			const promptTextArea = document.querySelector('textarea[data-id=root]');
-			const confirmButton = document.querySelector('textarea[data-id=root] + button')
+	loadingTabIds.set(tabId, { isLoading: true, queryText });
 
-			console.debug(`Maybe found Elements: `, { promptTextArea, confirmButton })
-		},
-	});
-
+	// Note: the content script will be injected in chrome.tabs.onUpdated. 
+	// This ensures that the tab finished loading
 });
 
 /**
