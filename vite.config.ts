@@ -1,8 +1,5 @@
 // vite.config.ts
 import { defineConfig } from 'vite';
-import watchAndRun from 'vite-plugin-watch-and-run';
-import rollupCopy from "rollup-plugin-copy-assets";
-import { resolve } from 'node:path';
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
@@ -13,7 +10,7 @@ export default defineConfig({
     assetsDir: '',
     emptyOutDir: true,
     lib: {
-      entry: 'src/background.js',
+      entry: 'src/background.ts',
       name: 'BackgroundServiceWorker',
       fileName: 'background',
       formats: ['es']
