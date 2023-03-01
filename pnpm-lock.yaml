@@ -9,9 +9,11 @@ specifiers:
   vite: ^4.1.4
   vite-plugin-static-copy: ^0.13.1
   vite-plugin-watch-and-run: ^1.1.2
+  zod: ^3.20.6
 
 dependencies:
   '@preact/signals-core': 1.2.3
+  zod: 3.20.6
 
 devDependencies:
   '@types/chrome': 0.0.218
@@ -707,3 +709,7 @@ packages:
   /wrappy/1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: true
+
+  /zod/3.20.6:
+    resolution: {integrity: sha512-oyu0m54SGCtzh6EClBVqDDlAYRz4jrVtKwQ7ZnsEmMI9HnzuZFj8QFwAY1M5uniIYACdGvv0PBWPF2kO0aNofA==}
+    dev: false

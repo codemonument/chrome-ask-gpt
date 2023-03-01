@@ -30,6 +30,7 @@
     "vite-plugin-watch-and-run": "^1.1.2"
   },
   "dependencies": {
-    "@preact/signals-core": "^1.2.3"
+    "@preact/signals-core": "^1.2.3",
+    "zod": "^3.20.6"
   }
 }
