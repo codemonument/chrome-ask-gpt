@@ -3,10 +3,13 @@
   "description": "Allows to ask ChatGPT right from your address bar!",
   "version": "1.0",
   "manifest_version": 3,
+  "author": " chrome-extensions@codemonument.com",
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "scripting"
   ]
 }
