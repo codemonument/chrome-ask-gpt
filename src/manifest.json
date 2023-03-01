@@ -20,5 +20,9 @@
   ],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "icons": {
+    "16": "assets/ChatGPT_logo.svg",
+    "128": "assets/ChatGPT_logo.svg"
   }
 }

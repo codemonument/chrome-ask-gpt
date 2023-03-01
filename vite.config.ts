@@ -35,6 +35,9 @@ export default defineConfig({
       targets: [{
         src: './src/manifest.json',
         dest: '.'
+      }, {
+        src: './src/assets',
+        dest: '.'
       }]
     }),
     // Note: This watchAndRun task does only run with `vite dev`, not with `vite build --watch`!
