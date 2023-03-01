@@ -1,7 +1,7 @@
 {
   "name": "Ask ChatGPT",
   "description": "Allows to ask ChatGPT right from your Chrome AdressBar (aka OmniBar)!",
-  "version": "1.0.0",
+  "version": "will-be-replaced-by-postbuild-script",
   "manifest_version": 3,
   "author": "chrome-extensions@codemonument.com",
   "omnibox": { "keyword": "gpt" },
