@@ -5,7 +5,7 @@
   "main": "background.js",
   "type": "module",
   "scripts": {
-    "preinstall": "echo \"Please use pnpm instead of npm!\"; exit -1"
+    "dev": "vite build --watch"
   },
   "repository": {
     "type": "git",
