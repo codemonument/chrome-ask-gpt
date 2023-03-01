@@ -1,4 +1,5 @@
 node_modules
+dist
 
 // don't commit package-lock.json to repo since this repo uses pnpm!
 package-lock.json
