@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/codemonument/chrome-ask-gpt#readme",
   "devDependencies": {
+    "esbuild": "^0.17.10",
     "prettier": "^2.8.4"
   },
   "dependencies": {
