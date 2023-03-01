@@ -3,7 +3,7 @@
   "description": "Allows to ask ChatGPT right from your address bar!",
   "version": "1.0.0",
   "manifest_version": 3,
-  "author": "chrome-extensions@codemonument.com +++",
+  "author": "chrome-extensions@codemonument.com",
   "omnibox": { "keyword": "gpt" },
   "background": {
     "service_worker": "background.js",

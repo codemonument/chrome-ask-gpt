@@ -24,13 +24,6 @@ export default defineConfig({
       //   // app: 'src/app.js',
       //   // admin: 'src/admin.js'
       // },
-      plugins: [
-        // rollupCopy({
-        //   assets: [
-        //     './src/manifest.json'
-        //   ]
-        // })
-      ]
     },
     // Note: Not helpful, since it can only limit the watching to files already in the watch graph, 
     // but manifest.json is not in the watchgraph normally
@@ -38,9 +31,9 @@ export default defineConfig({
     //   include: ['./src/manifest.json']
     // }
   },
-  // CAUTION: Plugins seem ONLY run in `vite dev` server mode!!!
   plugins: [
     // Note: Works in `vite build --watch` mode, but only directly after start, does not watch the asset!
+    // Note 2: Works correctly when using `import './manifest.json';` in background.js (or any other src file transformed by vite)
     viteStaticCopy({
       targets: [{
         src: './src/manifest.json',
