@@ -38,7 +38,7 @@ chrome.omnibox.onInputStarted.addListener(async () => {
 		// FIXME: When running this extention in icognito mode, this fetch seems to still have access to the login cookie of chat.openai.com,
 		// probably since this fetch still runs in this background service worker in non-icognito mode!
 		// TODO: Output some kind of warning about this when this extention is used in icognito mode!
-		credentials: 'omit',
+		// credentials: 'omit',
 	});
 	console.debug(`Fetch result!`, res);
 	// Note: chat.openai.com returns a 403 when fetched without login cretendials, instead of redirecting to the login page.
