@@ -1,12 +1,20 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@preact/signals-core': ^1.2.3
   prettier: ^2.8.4
+
+dependencies:
+  '@preact/signals-core': 1.2.3
 
 devDependencies:
   prettier: 2.8.4
 
 packages:
+
+  /@preact/signals-core/1.2.3:
+    resolution: {integrity: sha512-Kui4p7PMcEQevBgsTO0JBo3gyQ88Q3qzEvsVCuSp11t0JcN4DmGCTJcGRVSCq7Bn7lGxJBO+57jNSzDoDJ+QmA==}
+    dev: false
 
   /prettier/2.8.4:
     resolution: {integrity: sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==}

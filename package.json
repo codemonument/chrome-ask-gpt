@@ -20,5 +20,8 @@
   "homepage": "https://github.com/codemonument/chrome-ask-gpt#readme",
   "devDependencies": {
     "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "@preact/signals-core": "^1.2.3"
   }
 }
