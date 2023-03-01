@@ -1,5 +1,6 @@
 // vite.config.ts
 import { defineConfig } from 'vite'
+import { viteStaticCopy } from "vite-plugin-static-copy"
 
 export default defineConfig({
   build: {
@@ -20,5 +21,14 @@ export default defineConfig({
         // admin: 'src/admin.js'
       }
     }
-  }
+  },
+  plugins: [
+    // Options: https://www.npmjs.com/package/vite-plugin-static-copy
+    // Note: dest is relative to build.outDir
+    viteStaticCopy({
+      targets: [
+        { src: './src/manifest.json', dest: '.' }
+      ]
+    })
+  ]
 })
