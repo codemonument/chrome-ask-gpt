@@ -25,6 +25,7 @@
     "node": "link:@†ypes/node",
     "prettier": "^2.8.4",
     "shx": "^0.3.4",
+    "tsx": "^3.12.3",
     "vite": "^4.1.4",
     "vite-plugin-static-copy": "^0.13.1",
     "vite-plugin-watch-and-run": "^1.1.2"
