@@ -5,7 +5,9 @@
   "main": "background.js",
   "type": "module",
   "scripts": {
-    "dev": "vite build --watch"
+    "dev": "vite build --watch",
+    "copy-manifest": "shx cp ./src/public/manifest.json ./dist/manifest.json",
+    "echo": "echo 'Hello Watcher'"
   },
   "repository": {
     "type": "git",
@@ -19,9 +21,12 @@
   },
   "homepage": "https://github.com/codemonument/chrome-ask-gpt#readme",
   "devDependencies": {
+    "node": "link:@†ypes/node",
     "prettier": "^2.8.4",
+    "shx": "^0.3.4",
     "vite": "^4.1.4",
-    "vite-plugin-static-copy": "^0.13.1"
+    "vite-plugin-static-copy": "^0.13.1",
+    "vite-plugin-watch-and-run": "^1.1.2"
   },
   "dependencies": {
     "@preact/signals-core": "^1.2.3"

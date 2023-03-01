@@ -1,0 +1,24 @@
+{
+  "name": "Ask ChatGPT",
+  "description": "Allows to ask ChatGPT right from your address bar!",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "author": "chrome-extensions@codemonument.com ++++++",
+  "omnibox": { "keyword": "gpt" },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://chat.openai.com/*",
+    "https://chat.openai.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

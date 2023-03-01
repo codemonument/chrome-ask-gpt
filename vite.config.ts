@@ -1,8 +1,10 @@
 // vite.config.ts
-import { defineConfig } from 'vite'
-import { viteStaticCopy } from "vite-plugin-static-copy"
+import { defineConfig } from 'vite';
+import watchAndRun from 'vite-plugin-watch-and-run';
+import { resolve } from 'node:path';
 
 export default defineConfig({
+  publicDir: './src/public',
   build: {
     outDir: 'dist',
     assetsDir: '',
@@ -13,22 +15,28 @@ export default defineConfig({
       fileName: 'background',
       formats: ['es']
     },
-
     rollupOptions: {
       input: {
-        background: 'src/background.js'
+        options: './src/options.html',
         // app: 'src/app.js',
         // admin: 'src/admin.js'
       }
     }
   },
   plugins: [
-    // Options: https://www.npmjs.com/package/vite-plugin-static-copy
-    // Note: dest is relative to build.outDir
-    viteStaticCopy({
-      targets: [
-        { src: './src/manifest.json', dest: '.' }
+    // NOTE: This watchAndRun task does only run with `vite dev`, not with `vite build --watch`!
+    // Config Docs: https://www.kitql.dev/docs/setup/03_vite-plugin-watch-and-run
+    // FIXME: This watchAndRun copies correctly after a change happened, but doesn't do it on startup!
+    watchAndRun(
+      [
+        {
+          name: 'copy',
+          watchKind: ['add', 'change', 'ready'],
+          watch: resolve('./src/public/manifest.json'),
+          run: 'npm run copy-manifest',
+          delay: 200
+        }
       ]
-    })
+    )
   ]
 })
