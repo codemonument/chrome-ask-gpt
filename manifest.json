@@ -1,0 +1,12 @@
+{
+  "name": "Ask GPT",
+  "description": "Allows to ask ChatGPT right from your address bar!",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab"
+  ]
+}
