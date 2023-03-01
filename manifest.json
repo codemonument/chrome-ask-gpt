@@ -1,5 +1,5 @@
 {
-  "name": "Ask GPT",
+  "name": "Ask ChatGPT",
   "description": "Allows to ask ChatGPT right from your address bar!",
   "version": "1.0.0",
   "manifest_version": 3,
@@ -8,6 +8,7 @@
     "service_worker": "background.js",
     "type": "module"
   },
+  "omnibox": { "keyword": "gpt" },
   "permissions": [
     "activeTab",
     "scripting"
