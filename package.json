@@ -4,8 +4,7 @@
   "description": "A simple chrome extension which adds a search provider to the chrome omnibar to capture a search query and insert it into the text-input field of chat.openai.com",
   "main": "background.js",
   "type": "module",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codemonument/chrome-ask-gpt.git"
@@ -16,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/codemonument/chrome-ask-gpt/issues"
   },
-  "homepage": "https://github.com/codemonument/chrome-ask-gpt#readme"
+  "homepage": "https://github.com/codemonument/chrome-ask-gpt#readme",
+  "devDependencies": {
+    "prettier": "^2.8.4"
+  }
 }
