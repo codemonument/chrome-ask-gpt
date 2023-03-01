@@ -4,13 +4,14 @@
  */
 
 export function insertTextIntoChatGPT(queryText: string) {
-
-    alert('Jumped into custom insert function!');
-
     const promptTextArea = document.querySelector('textarea[data-id=root]');
     const confirmButton = document.querySelector('textarea[data-id=root] + button');
 
-    console.debug(`Maybe found Elements: `, { promptTextArea, confirmButton });
+    if (promptTextArea) {
+        (promptTextArea as HTMLTextAreaElement).value = queryText;
+    }
 
-    return { promptTextArea, confirmButton };
+    if (confirmButton) {
+        (confirmButton as HTMLButtonElement).click();
+    }
 }
