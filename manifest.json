@@ -1,7 +1,7 @@
 {
   "name": "Ask GPT",
   "description": "Allows to ask ChatGPT right from your address bar!",
-  "version": "1.0",
+  "version": "1.0.0",
   "manifest_version": 3,
   "author": " chrome-extensions@codemonument.com",
   "background": {
