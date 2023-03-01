@@ -35,13 +35,12 @@ chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
 		console.log('Tab has finished loading:', { url: tab.url, tabId });
 
 		// Inject queryText into chat.openai.com
-		const injectionResult = await chrome.scripting.executeScript({
+		await chrome.scripting.executeScript({
 			target: { tabId },
 			func: insertTextIntoChatGPT,
 			args: [loadingTab.queryText] as any
 		});
 
-		console.debug(`Injection result`, injectionResult);
 		return;
 	}
 
