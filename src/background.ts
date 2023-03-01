@@ -90,7 +90,7 @@ chrome.omnibox.onInputStarted.addListener(async () => {
  * User has changed what is typed into the omnibox.
  */
 chrome.omnibox.onInputChanged.addListener((text, suggestCallback) => {
-	console.log(`Omnibox input changed`, text);
+	// console.log(`Omnibox input changed`, text);
 	// suggestCallback([{
 	// 	description: 'Ask ChatGPT: ',
 	// 	content: text,
