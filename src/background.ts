@@ -1,4 +1,4 @@
-import { loadingTabIds, userLoggedIn } from './lib/state.js';
+import { loadingTabs, userLoggedIn } from './lib/state.js';
 import { z } from "zod";
 import './manifest.json';
 import { insertTextIntoChatGPT } from './lib/client-scripts';
@@ -29,7 +29,7 @@ chrome.runtime.onInstalled.addListener(details => {
 // Listen for tab updates to determin loading finished state for chat.openai.com
 chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
 	// Check if the updated tab is the one we created
-	const loadingTab = loadingTabIds.get(tabId);
+	const loadingTab = loadingTabs.get(tabId);
 	if (loadingTab && loadingTab.isLoading && changeInfo.status === 'complete') {
 		loadingTab.isLoading = false;
 		console.log('Tab has finished loading:', { url: tab.url, tabId });
@@ -41,6 +41,7 @@ chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
 			args: [loadingTab.queryText] as any
 		});
 
+		loadingTabs.delete(tabId);
 		return;
 	}
 
@@ -132,7 +133,7 @@ chrome.omnibox.onInputEntered.addListener(async (queryText, disposition) => {
 	const tab = await tabPromise;
 	const tabId = z.number().parse(tab.id);
 
-	loadingTabIds.set(tabId, { isLoading: true, queryText });
+	loadingTabs.set(tabId, { isLoading: true, queryText });
 
 	// Note: the content script will be injected in chrome.tabs.onUpdated. 
 	// This ensures that the tab finished loading

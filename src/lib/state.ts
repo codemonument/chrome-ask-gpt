@@ -11,4 +11,4 @@ export const userLoggedIn = signal(false);
 /**
  * key == tabId
  */
-export const loadingTabIds = new Map<number, { isLoading: boolean, queryText }>();
+export const loadingTabs = new Map<number, { isLoading: boolean, queryText }>();
