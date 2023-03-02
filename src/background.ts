@@ -42,16 +42,15 @@ chrome.omnibox.onInputStarted.addListener(async () => {
 
 	// check is user is logged in and give it the suggestion to goto login page!
 	const res = await fetch('https://chat.openai.com/chat', {
-		redirect: 'manual',
 		// This is only for testing what would happen if a user is not logged in!
 		// FIXME: When running this extention in icognito mode, this fetch seems to still have access to the login cookie of chat.openai.com,
 		// probably since this fetch still runs in this background service worker in non-icognito mode!
 		// TODO: Output some kind of warning about this when this extention is used in icognito mode!
 		// credentials: 'omit',
 	});
-	console.debug(`Fetch result!`, res);
+	console.debug(`Login check result redirect url!`, res.url);
 	// Note: chat.openai.com returns a 403 when fetched without login cretendials, instead of redirecting to the login page.
-	if (res.status === 403) {
+	if (res.redirected && new URL(res.url).pathname.startsWith('/auth/login')) {
 		console.debug(`User is not logged in! => Suggesting login at https://chat.openai.com/auth/login`);
 		chrome.omnibox.setDefaultSuggestion({
 			description:
