@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Fix janky login detection because of redirect mode 'manual'
+
 ## 1.0.0 Initial Release
 
 - Provide the search shortcut "gpt" in Chrome OmniBox
