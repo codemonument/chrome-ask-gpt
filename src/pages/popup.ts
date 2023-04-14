@@ -1,4 +1,8 @@
-console.log("Greeting from popup.js script!");
+import { logger } from "../lib/logging";
+import { enterPrompt } from "../lib/enterPrompt";
+import { injectContentScript } from "../lib/helpers";
+
+logger.log("Greeting from popup.js script!");
 
 async function getCurrentTab() {
   let queryOptions = { active: true };
@@ -6,11 +10,10 @@ async function getCurrentTab() {
   return tab;
 }
 
-async function enterPrompt(tab: chrome.tabs.Tab, prompt: string) {
-}
-
 const button = document.querySelector(`button`);
 button?.addEventListener(`click`, async () => {
+  logger.debug(`Button clicked!`);
   const tab = await getCurrentTab();
-  enterPrompt(tab, "Demo Prompt from Extension Popup");
+  injectContentScript(tab);
+  // enterPrompt(tab, "Demo Prompt from Extension Popup");
 });
