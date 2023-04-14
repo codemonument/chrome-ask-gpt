@@ -2,6 +2,9 @@ import { loadingTabs, userLoggedIn } from "./lib/state.js";
 import { z } from "zod";
 import "./manifest.json";
 import { insertTextIntoChatGPT } from "./lib/client-scripts";
+import { createLogger } from "./lib/createLogger.js";
+
+const logger = createLogger(`[Ask GPT ChromeExtension]`);
 
 /**
  * Main Extension Service Worker as ESModule
@@ -10,7 +13,23 @@ import { insertTextIntoChatGPT } from "./lib/client-scripts";
 chrome.runtime.onInstalled.addListener((details) => {
   // Debug output for easier development
   const log = `Ask GPT Extension changed because of: ${details.reason}!`;
-  console.log(log);
+  logger.log(log);
+});
+
+chrome.action.onClicked.addListener((tab) => {
+  if (!tab.id) {
+    logger.error(
+      `Can't inject something into current tab, no tab.id available!`,
+      tab,
+    );
+    return;
+  }
+
+  return chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: insertTextIntoChatGPT,
+    args: ["You look good today! Demo"] as any,
+  });
 });
 
 // Listen for tab updates to determin loading finished state for chat.openai.com
