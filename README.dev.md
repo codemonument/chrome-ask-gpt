@@ -5,15 +5,15 @@
 - Chrome V3 Manifest Format: https://developer.chrome.com/docs/extensions/mv3/manifest/
 - Chrome Extensions api docs: https://developer.chrome.com/docs/extensions/reference/
 
-## Configuring Rollup in Vite to output multiple entrypoints 
+## Configuring Rollup in Vite to output multiple entrypoints
 
 Needed for html entrypoints (for example chromes option.html or popup.html),
-together with js entrypoints, specifically background.js service worker entrypoint 
+together with js entrypoints, specifically background.js service worker entrypoint
 
 https://github.com/vitejs/vite/discussions/1736
 
-=> rollup config of vite library mode: https://github.com/vitejs/vite/blob/main/packages/vite/src/node/build.ts#L345-L372 
-=> Adjust to my own liking - use only rollup options like this: 
+=> rollup config of vite library mode: https://github.com/vitejs/vite/blob/main/packages/vite/src/node/build.ts#L345-L372
+=> Adjust to my own liking - use only rollup options like this:
 
 ```
  rollupOptions: {
@@ -31,3 +31,7 @@ https://github.com/vitejs/vite/discussions/1736
     },
 
 ```
+
+## Inject content script into tab page from a popup.html from your extension
+
+https://levelup.gitconnected.com/how-to-use-a-content-script-with-a-popup-in-your-chrome-extension-f4adb8070d0a
