@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@preact/signals-core': ^1.2.3
+  '@trpc/client': ^10.20.0
   '@trpc/server': ^10.20.0
   '@types/chrome': ^0.0.218
   bestzip: ^2.2.1
@@ -10,6 +11,7 @@ specifiers:
   npm-run-all: ^4.1.5
   prettier: ^2.8.4
   shx: ^0.3.4
+  trpc-chrome: ^1.0.0
   tsx: ^3.12.3
   vite: ^4.1.4
   vite-plugin-static-copy: ^0.13.1
@@ -19,7 +21,9 @@ specifiers:
 
 dependencies:
   '@preact/signals-core': 1.2.3
+  '@trpc/client': 10.20.0_@trpc+server@10.20.0
   '@trpc/server': 10.20.0
+  trpc-chrome: 1.0.0_6h4t7n6ksrv4hagmtgl2yasteu
   zod: 3.20.6
 
 devDependencies:
@@ -484,6 +488,14 @@ packages:
 
   /@preact/signals-core/1.2.3:
     resolution: {integrity: sha512-Kui4p7PMcEQevBgsTO0JBo3gyQ88Q3qzEvsVCuSp11t0JcN4DmGCTJcGRVSCq7Bn7lGxJBO+57jNSzDoDJ+QmA==}
+    dev: false
+
+  /@trpc/client/10.20.0_@trpc+server@10.20.0:
+    resolution: {integrity: sha512-DER42PjIURSl1fwVnBzMWMgo4oxbyA72nIVpOliIpNArDYkZkr7kMfXmap2J7gwaKJNMC/V5xhYc06zG9r/8pQ==}
+    peerDependencies:
+      '@trpc/server': 10.20.0
+    dependencies:
+      '@trpc/server': 10.20.0
     dev: false
 
   /@trpc/server/10.20.0:
@@ -1784,6 +1796,16 @@ packages:
     dependencies:
       is-number: 7.0.0
     dev: true
+
+  /trpc-chrome/1.0.0_6h4t7n6ksrv4hagmtgl2yasteu:
+    resolution: {integrity: sha512-lulJIFLh37dz1m8zDCliCKhKJmrZqCTZd+kVyfL084aKkqaZVbfjzm7WqWOmhXiKvP/4pWeKSh7qIN2DhwTDUA==}
+    peerDependencies:
+      '@trpc/client': ^10.0.0
+      '@trpc/server': ^10.0.0
+    dependencies:
+      '@trpc/client': 10.20.0_@trpc+server@10.20.0
+      '@trpc/server': 10.20.0
+    dev: false
 
   /tsx/3.12.3:
     resolution: {integrity: sha512-Wc5BFH1xccYTXaQob+lEcimkcb/Pq+0en2s+ruiX0VEIC80nV7/0s7XRahx8NnsoCnpCVUPz8wrqVSPi760LkA==}

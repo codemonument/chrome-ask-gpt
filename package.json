@@ -39,7 +39,9 @@
   },
   "dependencies": {
     "@preact/signals-core": "^1.2.3",
+    "@trpc/client": "^10.20.0",
     "@trpc/server": "^10.20.0",
+    "trpc-chrome": "^1.0.0",
     "zod": "^3.20.6"
   }
 }
