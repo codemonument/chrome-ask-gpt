@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@preact/signals-core": "^1.2.3",
+    "@trpc/server": "^10.20.0",
     "zod": "^3.20.6"
   }
 }

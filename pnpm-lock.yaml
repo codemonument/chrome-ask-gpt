@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@preact/signals-core': ^1.2.3
+  '@trpc/server': ^10.20.0
   '@types/chrome': ^0.0.218
   bestzip: ^2.2.1
   load-json-file: ^7.0.1
@@ -18,6 +19,7 @@ specifiers:
 
 dependencies:
   '@preact/signals-core': 1.2.3
+  '@trpc/server': 10.20.0
   zod: 3.20.6
 
 devDependencies:
@@ -482,6 +484,10 @@ packages:
 
   /@preact/signals-core/1.2.3:
     resolution: {integrity: sha512-Kui4p7PMcEQevBgsTO0JBo3gyQ88Q3qzEvsVCuSp11t0JcN4DmGCTJcGRVSCq7Bn7lGxJBO+57jNSzDoDJ+QmA==}
+    dev: false
+
+  /@trpc/server/10.20.0:
+    resolution: {integrity: sha512-pbrdgw2mO8lWygyZjGLbOq/EoWFWEJvLaxp8JmGsivMIh/IZR5mksPJdywAGQ4TBrbcqssKhuoJ/8OE9mhaveg==}
     dev: false
 
   /@types/chrome/0.0.218:
