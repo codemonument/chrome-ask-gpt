@@ -11,3 +11,9 @@ export function createLogger(name: string) {
 
   return logger;
 }
+
+/**
+ * Default Logger for AskGPT Extention
+ * CAUTION: Does work in anything besides content-scripts, bc. content scripts simply cannot import anything outside their method!
+ */
+export const logger = createLogger(`AskGPT:`);
