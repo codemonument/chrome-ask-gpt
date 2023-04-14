@@ -1,1 +1,1 @@
-console.log('Greeting from options page script!');
+console.log("Greeting from options.js page script!");
