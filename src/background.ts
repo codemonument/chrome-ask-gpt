@@ -2,9 +2,7 @@ import { loadingTabs, userLoggedIn } from "./lib/state.js";
 import { z } from "zod";
 import "./manifest.json";
 import { insertTextIntoChatGPT } from "./lib/client-scripts";
-import { createLogger } from "./lib/createLogger.js";
-
-const logger = createLogger(`[Ask GPT ChromeExtension]`);
+import { logger } from "./lib/logging.js";
 
 /**
  * Main Extension Service Worker as ESModule
