@@ -10,7 +10,8 @@
     "type": "module"
   },
   "permissions": [
-    "scripting"
+    "scripting",
+    "activeTab"
   ],
   "host_permissions": [
     "http://chat.openai.com/*",
@@ -32,8 +33,7 @@
       "16": "assets/icon_16x16.png",
       "32": "assets/icon_32x32.png"
     },
-    "default_title": "Test content",
-    "default_popup": "src/pages/popup.html"
+    "default_title": "Ask ChatGPT Chrome Extension"
   },
   "options_page": "src/pages/options.html"
 }
