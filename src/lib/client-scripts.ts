@@ -3,35 +3,53 @@
  * Please see the usages of these functions before making changes!
  */
 
-import { createLogger } from "./createLogger";
-const logger = createLogger(`[Ask ChatGPT Chrome Extension]`);
+// IMPORTANT: content scripts CAN'T ACCESS global variables in this file!
+// IMPORTANT 2: content scripts CAN'T EVEN ACCESS imports!!!
+// They can only acept inputs via serializable params!
+// import { createLogger } from "./createLogger";
 
-export function insertTextIntoChatGPT(queryText: string) {
-  const promptTextArea = document.querySelector("textarea[data-id=root]");
-  const confirmButton = document.querySelector(
+export function insertTextIntoChatGPT(
+  queryText: string,
+) {
+  // const logger = createLogger(`[Ask GPT Chrome Extension]`);
+
+  const promptTextAreaElement = document.querySelector(
+    "textarea[data-id=root]",
+  );
+  const confirmButtonElement = document.querySelector(
     "textarea[data-id=root] + button",
   );
 
-  if (!promptTextArea) {
-    logger.error(
-      `promptTextArea is undefined, textarea[data-id=root] not found!`,
-      promptTextArea,
+  if (!promptTextAreaElement) {
+    console.error(
+      `[Ask GPT Chrome Extension] promptTextArea is undefined, textarea[data-id=root] not found!`,
+      promptTextAreaElement,
     );
     return;
   }
 
-  if (!confirmButton) {
-    logger.error(
-      `confirmButton is undefined, textarea[data-id=root] + button not found!`,
-      confirmButton,
+  if (!confirmButtonElement) {
+    console.error(
+      `[Ask GPT Chrome Extension] confirmButton is undefined, textarea[data-id=root] + button not found!`,
+      confirmButtonElement,
     );
     return;
   }
 
-  logger.debug(`Found elements on openai page: `, {
-    promptTextArea, confirmButton
+  const textArea = promptTextAreaElement as HTMLTextAreaElement;
+  const confirmButton = confirmButtonElement as HTMLButtonElement;
+
+  console.debug(`[Ask GPT Chrome Extension] Found elements on openai page: `, {
+    textArea,
+    confirmButton,
   });
 
-  (promptTextArea as HTMLTextAreaElement).value = queryText;
-  (confirmButton as HTMLButtonElement).click();
+  textArea.value = queryText;
+  var event = new Event("input", {
+    "bubbles": true,
+    "cancelable": true,
+  });
+
+  textArea.dispatchEvent(event);
+  confirmButton.click();
 }
