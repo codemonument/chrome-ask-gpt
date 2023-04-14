@@ -1,5 +1,5 @@
 {
-  "name": "Ask ChatGPT",
+  "name": "AskGPT",
   "description": "Allows to ask ChatGPT right from your Chrome OmniBar (a.k.a Adress Bar)!",
   "version": "0.0.0.1111",
   "manifest_version": 3,
