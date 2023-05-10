@@ -1,13 +1,34 @@
-// vite.config.ts
-import path from "node:path";
+// vite.config.ts - copied some tricks from https://github.com/fuyutarow/solid-chrome-extension-template/blob/alpha/vite.config.ts
+import path, { resolve } from "node:path";
 import { defineConfig } from "vite";
+import solidPlugin from "vite-plugin-solid";
 import { viteStaticCopy } from "vite-plugin-static-copy";
+import manifest from "./src/manifest.json";
+import WindiCSS from "vite-plugin-windicss";
+
+const srcDir = resolve(__dirname, "src");
+const pagesDir = resolve(srcDir, "pages");
+const assetsDir = resolve(srcDir, "assets");
+const outDir = resolve(__dirname, "dist");
+const isDev = process.env.__DEV__ === "true";
+
+// Not using the public dir right now
+// const publicDir = path.resolve(__dirname, "public");
 
 export default defineConfig({
   // Note: Problem with public dir: does not watch it's contents after starting `vite build --watch`
   // publicDir: './src/public',
+  resolve: {
+    alias: {
+      "@src": srcDir,
+      "@assets": assetsDir,
+      "@pages": pagesDir,
+    },
+  },
+  // publicDir,
   build: {
-    outDir: "dist",
+    outDir,
+    sourcemap: isDev,
     assetsDir: "",
     emptyOutDir: true,
     // Note @bjesuiter 2023-04-14: lib build path replaced by rollupOptions for building multiple entrypoints
@@ -25,10 +46,11 @@ export default defineConfig({
         // assetFileNames: `[name].[ext]`,
       },
       input: {
-        background: path.resolve("src/background.ts"),
-        content: path.resolve("src/lib/content-scripts/content_es5.ts"),
-        options: path.resolve("./src/pages/options.html"),
-        popup: path.resolve("./src/pages/popup.html"),
+        background: resolve(srcDir, "background.ts"),
+        content: resolve(srcDir, "lib/content-scripts/content_es5.ts"),
+        options: resolve(pagesDir, "options", "index.html"),
+        popup: resolve(pagesDir, "popup.html"),
+        // popup: resolve(pagesDir, "popup", "index.html"),
       },
     },
     // Note: Not helpful, since it can only limit the watching to files already in the watch graph,
@@ -38,6 +60,8 @@ export default defineConfig({
     // }
   },
   plugins: [
+    solidPlugin(),
+    WindiCSS(),
     // Note: Works in `vite build --watch` mode, but only directly after start, does not watch the asset!
     // Note 2: Works correctly when using `import './manifest.json';` in background.js (or any other src file transformed by vite)
     viteStaticCopy({
