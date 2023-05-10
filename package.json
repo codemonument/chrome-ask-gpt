@@ -25,6 +25,7 @@
   "homepage": "https://github.com/codemonument/chrome-ask-gpt#readme",
   "devDependencies": {
     "@types/chrome": "^0.0.218",
+    "@types/node": "^20.1.2",
     "bestzip": "^2.2.1",
     "load-json-file": "^7.0.1",
     "node": "link:@†ypes/node",
