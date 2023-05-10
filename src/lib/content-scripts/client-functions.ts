@@ -14,18 +14,6 @@ export function insertTextIntoChatGPT(
 ) {
   // const logger = createLogger(`[Ask GPT Chrome Extension]`);
 
-  // Check if login button  is available
-  // CAUTION: BRITTLE! If this should return the login button, but does not, check querySelector
-  const loginButton = document.querySelector(
-    "div.flex > div.flex-row > button.btn-primary",
-  );
-
-  if (loginButton !== null) {
-    // TODO: Do something when login button is shown!
-    console.log(loginButton);
-    return;
-  }
-
   const promptTextAreaElement = document.querySelector(
     "textarea[data-id=root]",
   );
@@ -65,4 +53,24 @@ export function insertTextIntoChatGPT(
 
   textArea.dispatchEvent(event);
   confirmButton.click();
+}
+
+export function isLoginScreen() {
+  // Check if login button or subscriber login is available
+  // CAUTION: BRITTLE! If this should return the login button, but does not, check querySelector
+  const loginButton = document.querySelector(
+    "div.flex > div.flex-row > button.btn-primary",
+  );
+
+  const subscriberEmailInput = document.querySelector(
+    "input#email",
+  );
+
+  if (loginButton !== null || subscriberEmailInput !== null) {
+    console.log({ loginButton, subscriberEmailInput });
+    return true;
+  }
+
+  // else
+  return false;
 }
