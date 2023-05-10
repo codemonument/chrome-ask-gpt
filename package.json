@@ -42,6 +42,7 @@
     "@trpc/client": "^10.20.0",
     "@trpc/server": "^10.20.0",
     "trpc-chrome": "^1.0.0",
+    "vite-plugin-solid": "^2.7.0",
     "zod": "^3.21.4"
   }
 }
