@@ -5,13 +5,26 @@
 
 // IMPORTANT: content scripts CAN'T ACCESS global variables in this file!
 // IMPORTANT 2: content scripts CAN'T EVEN ACCESS imports!!!
-// They can only acept inputs via serializable params!
-// import { createLogger } from "./createLogger";
+// They can only accept inputs via serializable params!
+import { logger } from "./logging";
+logger.debug(`client-scripts.ts file loaded!`);
 
 export function insertTextIntoChatGPT(
   queryText: string,
 ) {
   // const logger = createLogger(`[Ask GPT Chrome Extension]`);
+
+  // Check if login button  is available
+  // CAUTION: BRITTLE! If this should return the login button, but does not, check querySelector
+  const loginButton = document.querySelector(
+    "div.flex > div.flex-row > button.btn-primary",
+  );
+
+  if (loginButton !== null) {
+    // TODO: Do something when login button is shown!
+    console.log(loginButton);
+    return;
+  }
 
   const promptTextAreaElement = document.querySelector(
     "textarea[data-id=root]",
