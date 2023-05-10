@@ -10,6 +10,9 @@ dependencies:
   '@trpc/server':
     specifier: ^10.20.0
     version: 10.20.0
+  solid-js:
+    specifier: ^1.7.5
+    version: 1.7.5
   trpc-chrome:
     specifier: ^1.0.0
     version: 1.0.0(@trpc/client@10.20.0)(@trpc/server@10.20.0)
