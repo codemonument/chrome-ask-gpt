@@ -1,6 +1,11 @@
 import { logger } from "./logging";
 
-export function injectContentScript(tab: chrome.tabs.Tab) {
+/**
+ * Note: The content.js script in here must be ES5, bc. ESM will create import errors!
+ * @param tab 
+ * @returns 
+ */
+export async function injectPredefinedContentScript(tab: chrome.tabs.Tab) {
   const { id, url } = tab;
 
   if (!id) {
@@ -11,12 +16,13 @@ export function injectContentScript(tab: chrome.tabs.Tab) {
     return;
   }
 
-  chrome.scripting.executeScript(
+  console.log(`Loading: ${url}`);
+  await chrome.scripting.executeScript(
     {
       target: { tabId: id, allFrames: true },
       // this file will be directly in the /dist folder after vite compilation :)
       files: ["content.js"],
     },
   );
-  console.log(`Loading: ${url}`);
+  console.log("script injected in all frames");
 }

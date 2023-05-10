@@ -26,6 +26,7 @@ export default defineConfig({
       },
       input: {
         background: path.resolve("src/background.ts"),
+        content: path.resolve("src/lib/content-scripts/content_es5.ts"),
         options: path.resolve("./src/pages/options.html"),
         popup: path.resolve("./src/pages/popup.html"),
       },
