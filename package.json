@@ -34,8 +34,10 @@
     "shx": "^0.3.4",
     "tsx": "^3.12.3",
     "vite": "^4.1.4",
+    "vite-plugin-solid": "^2.7.0",
     "vite-plugin-static-copy": "^0.13.1",
     "vite-plugin-watch-and-run": "^1.1.2",
+    "vite-plugin-windicss": "^1.9.0",
     "write-json-file": "^5.0.0"
   },
   "dependencies": {
@@ -44,7 +46,6 @@
     "@trpc/server": "^10.20.0",
     "solid-js": "^1.7.5",
     "trpc-chrome": "^1.0.0",
-    "vite-plugin-solid": "^2.7.0",
     "zod": "^3.21.4"
   }
 }
