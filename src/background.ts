@@ -1,8 +1,11 @@
 import { loadingTabs, userLoggedIn } from "./lib/state.js";
 import { z } from "zod";
 import "./manifest.json";
-import { insertTextIntoChatGPT } from "./lib/client-scripts";
+import { insertTextIntoChatGPT } from "./lib/content-scripts/client-functions.js";
 import { logger } from "./lib/logging.js";
+
+// Initializes the trpc_server
+import "./lib/trpc_server";
 
 /**
  * Main Extension Service Worker as ESModule
@@ -32,6 +35,15 @@ chrome.action.onClicked.addListener((tab) => {
 
 // Listen for tab updates to determin loading finished state for chat.openai.com
 chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
+  // 2023-05-10 not in use right now
+  // if (
+  //   changeInfo.url && new URL(changeInfo.url).host.startsWith("chat.openai.com")
+  // ) {
+  //   // Inject Trpc based content script
+  //   logger.log(`Injecting TRPC Content Script!`, { tabId, changeInfo, tab });
+  //   await injectPredefinedContentScript(tab);
+  // }
+
   // Check if the updated tab is the one we created
   const loadingTab = loadingTabs.get(tabId);
   if (loadingTab && loadingTab.isLoading && changeInfo.status === "complete") {
@@ -39,6 +51,8 @@ chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
     console.log("Tab has finished loading:", { url: tab.url, tabId });
 
     // Inject queryText into chat.openai.com
+    // await injectPredefinedContentScript(tab);
+
     await chrome.scripting.executeScript({
       target: { tabId },
       func: insertTextIntoChatGPT,

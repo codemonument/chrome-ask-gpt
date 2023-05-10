@@ -6,7 +6,7 @@
 // IMPORTANT: content scripts CAN'T ACCESS global variables in this file!
 // IMPORTANT 2: content scripts CAN'T EVEN ACCESS imports!!!
 // They can only accept inputs via serializable params!
-import { logger } from "./logging";
+import { logger } from "../logging";
 logger.debug(`client-scripts.ts file loaded!`);
 
 export function insertTextIntoChatGPT(
