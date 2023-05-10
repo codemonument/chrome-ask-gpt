@@ -34,7 +34,7 @@
       "32": "assets/icon_32x32.png"
     },
     "default_title": "Ask ChatGPT Chrome Extension",
-    "default_popup": "src/pages/popup.html"
+    "default_popup": "src/pages/popup/index.html"
   },
   "options_page": "src/pages/options/index.html"
 }
