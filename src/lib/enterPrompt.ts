@@ -1,4 +1,4 @@
-import { insertTextIntoChatGPT } from "./client-scripts";
+import { insertTextIntoChatGPT } from './content-scripts/client-functions';
 import { logger } from "./logging";
 
 export async function enterPrompt(tab: chrome.tabs.Tab, prompt: string) {

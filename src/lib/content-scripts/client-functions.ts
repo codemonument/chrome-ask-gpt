@@ -55,7 +55,7 @@ export function insertTextIntoChatGPT(
   confirmButton.click();
 }
 
-export function isLoginScreen() {
+export function isLoginScreenCheck() {
   // Check if login button or subscriber login is available
   // CAUTION: BRITTLE! If this should return the login button, but does not, check querySelector
   const loginButton = document.querySelector(

@@ -1,4 +1,3 @@
-import logo from "@assets/ChatGPT_logo.svg";
 import "@src/styles/index.css";
 import styles from "./Popup.module.css";
 

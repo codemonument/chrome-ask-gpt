@@ -1,8 +1,14 @@
 import { logger } from "../lib/logging";
 import { enterPrompt } from "../lib/enterPrompt";
-import { injectContentScript } from "../lib/helpers";
+import { injectPredefinedContentScript } from "../lib/helpers";
+import { effect } from '@preact/signals-core';
 
 logger.log("Greeting from popup.js script!");
+
+(async () => {
+  // const tab = await getCurrentTab();
+  // await injectContentScript(tab);
+})();
 
 async function getCurrentTab() {
   let queryOptions = { active: true };
@@ -10,10 +16,19 @@ async function getCurrentTab() {
   return tab;
 }
 
-const button = document.querySelector(`button`);
-button?.addEventListener(`click`, async () => {
+const promptHistoryUl = document.querySelector(`#prompt-history-ul`); 
+
+effect(() => {
+  
+})
+
+const testButton = document.querySelector(`button.test`);
+testButton?.addEventListener(`click`, async () => {
   logger.debug(`Button clicked!`);
-  const tab = await getCurrentTab();
-  injectContentScript(tab);
   // enterPrompt(tab, "Demo Prompt from Extension Popup");
+});
+
+const injectButton = document.querySelector(`button.inject`);
+injectButton?.addEventListener(`click`, async () => {
+  logger.debug(`Inject Button clicked!`);
 });

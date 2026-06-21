@@ -1,7 +1,10 @@
 import { loadingTabs, userLoggedIn } from "./lib/state.js";
 import { z } from "zod";
 import "./manifest.json";
-import { insertTextIntoChatGPT } from "./lib/content-scripts/client-functions.js";
+import {
+  insertTextIntoChatGPT,
+  isLoginScreenCheck,
+} from "./lib/content-scripts/client-functions.js";
 import { logger } from "./lib/logging.js";
 
 // Initializes the trpc_server
@@ -35,14 +38,25 @@ chrome.action.onClicked.addListener((tab) => {
 
 // Listen for tab updates to determin loading finished state for chat.openai.com
 chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
-  // 2023-05-10 not in use right now
-  // if (
-  //   changeInfo.url && new URL(changeInfo.url).host.startsWith("chat.openai.com")
-  // ) {
-  //   // Inject Trpc based content script
-  //   logger.log(`Injecting TRPC Content Script!`, { tabId, changeInfo, tab });
-  //   await injectPredefinedContentScript(tab);
-  // }
+  // Check, if any tab opened for chat.openai.com is on the login screen!
+  if (
+    changeInfo.url && new URL(changeInfo.url).host.startsWith("chat.openai.com")
+  ) {
+    // Chrome's executeScript returns like this:
+    // [{
+    //     "documentId": "5B3ABE52218810C295E2D2C40B614798",
+    //     "frameId": 0,
+    //     "result": true
+    // }]
+    const [{ result }] = await chrome.scripting.executeScript({
+      target: { tabId },
+      func: isLoginScreenCheck,
+    });
+    const isLoginScreen = result;
+
+    console.log(`isLoginScreen`, isLoginScreen);
+    if (isLoginScreen) return;
+  }
 
   // Check if the updated tab is the one we created
   const loadingTab = loadingTabs.get(tabId);
@@ -51,7 +65,6 @@ chrome.tabs.onUpdated.addListener(async function (tabId, changeInfo, tab) {
     console.log("Tab has finished loading:", { url: tab.url, tabId });
 
     // Inject queryText into chat.openai.com
-    // await injectPredefinedContentScript(tab);
 
     await chrome.scripting.executeScript({
       target: { tabId },
